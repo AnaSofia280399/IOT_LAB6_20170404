@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+        <item
+            android:id="@+id/bottom_ingresos"
+            android:icon="@drawable/savings_24dp_fill0_wght400_grad0_opsz24"
+            android:title="Ingresos"/>
+
+        <item
+            android:id="@+id/bottom_egresos"
+            android:icon="@drawable/payments_24dp_fill0_wght400_grad0_opsz24"
+            android:title="Egresos"
+            />
+
+        <item
+            android:id="@+id/bottom_resumen"
+            android:icon="@drawable/finance_24dp_fill0_wght400_grad0_opsz24"
+            android:title="Resumen"/>
+
+        <item
+            android:id="@+id/bottom_logout"
+            android:icon="@drawable/logout_24dp_fill0_wght400_grad0_opsz24"
+            android:title="Salir"
+            />
+
+
+
+</menu>
