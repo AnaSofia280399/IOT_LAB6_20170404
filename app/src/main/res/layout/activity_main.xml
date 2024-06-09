@@ -17,6 +17,29 @@
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp">
 
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNavigationView"
+            android:layout_width="374dp"
+            android:layout_height="73dp"
+
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="28dp"
+            android:background="@drawable/bottom_background"
+            android:elevation="2dp"
+            app:itemIconSize="30dp"
+            app:itemIconTint="@drawable/item_selector"
+            app:itemRippleColor="@android:color/transparent"
+            app:itemTextColor="@color/white"
+            app:labelVisibilityMode="selected"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.432"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2"
+            app:layout_constraintVertical_bias="0.947"
+            app:menu="@menu/bottom_menu" />
+
         <androidx.appcompat.widget.SearchView
             android:id="@+id/search_ingresos"
             android:layout_width="match_parent"
@@ -38,6 +61,7 @@
 
 
         <TextView
+            android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -76,29 +100,6 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@drawable/bottom_background"
-        android:layout_marginEnd="20dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="30dp"
-        android:elevation="2dp"
-        app:menu="@menu/bottom_menu"
-        app:itemIconSize="30dp"
-        app:itemIconTint="@drawable/item_selector"
-        app:itemRippleColor="@android:color/transparent"
-        app:itemTextColor="@color/white"
-        app:labelVisibilityMode="selected"
-
-
-        />
-
-
 
 
 </RelativeLayout>

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
+
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@drawable/wallpaper"
-    tools:context=".Ingreso_NuevoActivity">
+    tools:context=".Egresos_EditActivity">
 
     <LinearLayout
 
@@ -40,7 +40,7 @@
                     android:layout_height="35dp"
                     android:background="@drawable/search_bkg"
                     android:gravity="center"
-                    android:text="Nuevo Ingreso"
+                    android:text="Editar Egreso"
                     android:textColor="@color/black"
                     android:textSize="25dp"
                     android:textStyle="bold"
@@ -55,60 +55,64 @@
                 android:layout_height="53dp"
                 android:layout_gravity="center_vertical"
                 android:gravity="center"
-                android:text="Complete los campos requeridos"
+                android:text="Puede editar los campos deseados"
                 android:textColor="@android:color/black"
                 android:textSize="15dp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.441"
+                app:layout_constraintHorizontal_bias="0.49"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardView"
-                app:layout_constraintVertical_bias="0.039" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.122" />
 
             <LinearLayout
-                android:id="@+id/linearLayout"
-                android:layout_width="331dp"
-                android:layout_height="358dp"
+                android:id="@+id/linearLayout3"
+                android:layout_width="332dp"
+                android:layout_height="364dp"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.487"
+                app:layout_constraintHorizontal_bias="0.443"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/indicaciones"
-                app:layout_constraintVertical_bias="0.047">
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.397">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="360dp"
+                    android:layout_height="365dp"
                     android:orientation="horizontal">
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="352dp"
+                        android:layout_height="361dp"
                         android:layout_weight="1"
                         android:orientation="vertical"
                         android:textAlignment="center">
 
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/textInputLayoutSuper_name"
+                        <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Titulo"
-                            android:inputType="text"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/textView"
-                            tools:ignore="MissingConstraints">
+                            android:paddingLeft="12dp"
+                            android:paddingTop="15dp"
+                            android:text="Título:"
+                            android:textColor="@color/color_principal"
+                            android:textSize="19sp"
+                            android:textStyle="bold"
 
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/titulo_nuevoIngreso"
-                                android:layout_width="match_parent"
-                                android:layout_height="60dp"
-                                android:ems="10"
-                                android:inputType="text"
-                                tools:ignore="LabelFor" />
-                        </com.google.android.material.textfield.TextInputLayout>
+                            />
+
+                        <TextView
+                            android:id="@+id/titulo_editEgreso"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:paddingLeft="12dp"
+                            android:paddingBottom="10dp"
+                            android:text="descripcion"
+                            android:textSize="17sp"
+
+                            />
 
 
                         <com.google.android.material.textfield.TextInputLayout
@@ -124,38 +128,38 @@
                             tools:ignore="MissingConstraints">
 
                             <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/monto_nuevoIngreso"
+                                android:id="@+id/monto_editEgreso"
                                 android:layout_width="match_parent"
                                 android:layout_height="60dp"
                                 android:ems="10"
-                                android:inputType="numberDecimal"
-
+                                android:inputType="text"
                                 android:maxLength="8"
                                 tools:ignore="LabelFor" />
                         </com.google.android.material.textfield.TextInputLayout>
 
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/textInputLayoutSuper_email"
+                        <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Fecha"
-                            android:inputType="text"
-                            android:paddingTop="2dp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/textView"
-                            tools:ignore="MissingConstraints">
+                            android:paddingLeft="12dp"
+                            android:paddingTop="15dp"
+                            android:text="Fecha:"
+                            android:textColor="@color/color_principal"
+                            android:textSize="19sp"
+                            android:textStyle="bold"
 
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/fecha_nuevoIngreso"
-                                android:layout_width="match_parent"
-                                android:layout_height="60dp"
-                                android:clickable="true"
-                                android:ems="10"
-                                android:focusable="false"
-                                android:inputType="datetime"
-                                tools:ignore="LabelFor" />
-                        </com.google.android.material.textfield.TextInputLayout>
+                            />
+
+                        <TextView
+                            android:id="@+id/fecha_editEgreso"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:paddingLeft="12dp"
+                            android:paddingBottom="10dp"
+                            android:text="Fecha"
+                            android:textSize="17sp"
+
+                            />
 
 
                         <com.google.android.material.textfield.TextInputLayout
@@ -168,9 +172,9 @@
                             app:layout_constraintTop_toBottomOf="@+id/textView">
 
                             <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/descripcion_nuevoIngreso"
+                                android:id="@+id/descripcion_editEgreso"
                                 android:layout_width="match_parent"
-                                android:layout_height="144dp"
+                                android:layout_height="match_parent"
                                 android:gravity="top"
                                 android:inputType="textMultiLine"
                                 android:maxLines="10"
@@ -185,61 +189,49 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <com.google.android.material.bottomnavigation.BottomNavigationView
-                android:id="@+id/bottomNavigationView"
-                android:layout_width="374dp"
-                android:layout_height="73dp"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="28dp"
-                android:background="@drawable/bottom_background"
-                android:elevation="2dp"
-                app:itemIconSize="30dp"
-                app:itemIconTint="@drawable/item_selector"
-                app:itemRippleColor="@android:color/transparent"
-                app:itemTextColor="@color/white"
-                app:labelVisibilityMode="selected"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.432"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/boton_guardarNuevoIngreso"
-                app:layout_constraintVertical_bias="0.947"
-                app:menu="@menu/bottom_menu" />
-
             <Button
-                android:id="@+id/boton_guardarNuevoIngreso"
+                android:id="@+id/boton_guardarEditEgreso"
                 android:layout_width="148dp"
                 android:layout_height="60dp"
+                android:layout_marginTop="23dp"
                 android:backgroundTint="@color/color_principal"
                 android:text="Guardar"
                 android:textAlignment="textStart"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp"
                 app:cornerRadius="5dp"
-                app:icon="@drawable/savings_24dp_fill0_wght400_grad0_opsz24"
+                app:icon="@drawable/payments_24dp_fill0_wght400_grad0_opsz24"
                 app:iconSize="26dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-                app:layout_constraintVertical_bias="0.091" />
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottomNavigationView"
+                android:layout_width="374dp"
+                android:layout_height="73dp"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/bottom_background"
+                android:elevation="2dp"
+                app:itemIconSize="30dp"
+                app:itemIconTint="@drawable/item_selector"
+                app:itemRippleColor="@android:color/transparent"
+                app:itemTextColor="@color/white"
+
+                app:labelVisibilityMode="selected"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.486"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/boton_guardarEditEgreso"
+                app:menu="@menu/bottom_menu" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-
-
-
-
-
-
-
-
     </LinearLayout>
-
-
-
 
 </RelativeLayout>

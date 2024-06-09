@@ -5,15 +5,16 @@ public class Egreso {
     private String descripcion;
     private String fecha;
     private String titulo;
-    private Float monto;
+    private Double monto;
+    private String id;
 
-    public Egreso(String descripcion, String fecha, String titulo, Float monto) {
+    public Egreso(String descripcion, String fecha, String titulo, Double monto, String id) {
         this.descripcion = descripcion;
         this.fecha = fecha;
         this.titulo = titulo;
         this.monto = monto;
+        this.id = id;
     }
-
     public Egreso(){
 
     }
@@ -42,11 +43,19 @@ public class Egreso {
         this.titulo = titulo;
     }
 
-    public Float getMonto() {
+    public Double getMonto() {
         return monto;
     }
 
-    public void setMonto(Float monto) {
+    public void setMonto(Double monto) {
         this.monto = monto;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

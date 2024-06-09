@@ -22,6 +22,7 @@ import com.example.iot_lab6_20170404.dto.Ingreso;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -31,6 +32,8 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.TimeZone;
 
 public class Ingreso_NuevoActivity extends AppCompatActivity {
@@ -58,12 +61,31 @@ public class Ingreso_NuevoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ingreso_nuevo);
 
-
         db = FirebaseFirestore.getInstance();
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
+        //Navigation Bottom Logica ---------------------------
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setSelectedItemId(R.id.bottom_ingresos);
+
+        Map<String, Intent> navigationMap = new HashMap<>();
+        navigationMap.put("bottom_egresos", new Intent(getApplicationContext(), EgresosActivity.class));
+        navigationMap.put("bottom_resumen", new Intent(getApplicationContext(), ResumenActivity.class));
+
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            String itemId = getResources().getResourceEntryName(item.getItemId());
+            if (navigationMap.containsKey(itemId)) {
+                startActivity(navigationMap.get(itemId));
+                overridePendingTransition(R.anim.slide_in_rigth, R.anim.slide_out_left);
+                finish();
+                return true;
+            }
+            return false;
+        });
 
 
+        //----------------------------------------------------
 
         //relacionamos la vista
 
