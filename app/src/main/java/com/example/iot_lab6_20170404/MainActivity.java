@@ -26,9 +26,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.annotations.Nullable;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -123,31 +125,27 @@ public class MainActivity extends AppCompatActivity {
         db.collection("usuarios_por_auth")
                 .document(uid)
                 .collection("ingresos")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            dataList.clear();
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Ingreso ingreso = document.toObject(Ingreso.class);
-                                dataList.add(ingreso);
-                            }
-                            adapter.notifyDataSetChanged();
-
-                            dialog.dismiss();
-
-                            // Muestra un Toast con el tamaño de la lista
-                            Toast.makeText(getApplicationContext(), "Número de ingresos: " + dataList.size(), Toast.LENGTH_LONG).show();
-
-
-                        } else {
-                            // Manejar la situación cuando la consulta falla
-                            Log.d("Firestore", "Error getting documents: ", task.getException());
+                    public void onEvent(@Nullable QuerySnapshot snapshots,
+                                        @Nullable FirebaseFirestoreException e) {
+                        if (e != null) {
+                            Log.w("Firestore Error", "listen:error", e);
+                            return;
                         }
+
+                        dataList.clear();
+                        for (DocumentSnapshot doc : snapshots.getDocuments()) {
+                            Ingreso ingreso = doc.toObject(Ingreso.class);
+                            dataList.add(ingreso);
+                        }
+                        adapter.notifyDataSetChanged();
+                        dialog.dismiss();
+
+                        // Muestra un Toast con el tamaño de la lista actualizada
+                        Toast.makeText(getApplicationContext(), "Número de ingresos: " + dataList.size(), Toast.LENGTH_LONG).show();
                     }
                 });
-
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
 
             @Override

@@ -90,6 +90,10 @@ public class DetailActivity extends AppCompatActivity {
                                 ingreso_fecha.setText(fecha);
                                 ingreso_descripcion.setText(descripcion);
 
+                                Double monto = document.getDouble("monto"); // Corregido aquí
+
+                                ingreso_monto.setText(String.format("%.2f", monto));
+
                             } else {
                                 Toast.makeText(DetailActivity.this, "Credenciales incorrectas", Toast.LENGTH_SHORT).show();
                             }
