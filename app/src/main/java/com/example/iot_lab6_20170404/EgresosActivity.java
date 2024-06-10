@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -18,6 +19,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.iot_lab6_20170404.dto.Egreso;
 import com.example.iot_lab6_20170404.dto.Ingreso;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -56,10 +61,28 @@ public class EgresosActivity extends AppCompatActivity {
     SearchView searchView;
     //------------------------
 
+    TextView userName;
+
+    GoogleSignInClient gClient;
+    GoogleSignInOptions gOptions;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_egresos);
+
+        userName = findViewById(R.id.userName_egreso);
+
+
+        gOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
+        gClient = GoogleSignIn.getClient(this, gOptions);
+
+        GoogleSignInAccount gAccount = GoogleSignIn.getLastSignedInAccount(this);
+
+        if (gAccount != null){
+            String gname = gAccount.getDisplayName();
+            userName.setText(gname);
+        }
 
         //Navigation Bottom Logica ---------------------------
 
@@ -73,8 +96,16 @@ public class EgresosActivity extends AppCompatActivity {
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
             String itemId = getResources().getResourceEntryName(item.getItemId());
+            if ("bottom_logout".equals(itemId)) {
+                gClient.signOut().addOnCompleteListener(task -> {
+                    finish();
+                    startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                });
+                return true; // Detener el procesamiento si es logout
+            }
             if (navigationMap.containsKey(itemId)) {
-                startActivity(navigationMap.get(itemId));
+                Intent intent = navigationMap.get(itemId);
+                startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_rigth, R.anim.slide_out_left);
                 finish();
                 return true;
@@ -137,7 +168,6 @@ public class EgresosActivity extends AppCompatActivity {
                         dialog.dismiss();
 
                         // Muestra un Toast con el tamaño de la lista actualizada
-                        Toast.makeText(getApplicationContext(), "Número de egresos: " + dataList.size(), Toast.LENGTH_LONG).show();
                     }
                 });
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){

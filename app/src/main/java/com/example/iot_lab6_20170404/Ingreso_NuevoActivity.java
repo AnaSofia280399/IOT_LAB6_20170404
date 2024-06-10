@@ -19,6 +19,10 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.iot_lab6_20170404.dto.Ingreso;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -54,6 +58,8 @@ public class Ingreso_NuevoActivity extends AppCompatActivity {
 
     Button guardarButton;
     EditText nuevo_titulo, nuevo_monto, nuevo_descripcion, nuevo_fecha;
+    GoogleSignInClient gClient;
+    GoogleSignInOptions gOptions;
 
 
     @Override
@@ -63,6 +69,12 @@ public class Ingreso_NuevoActivity extends AppCompatActivity {
 
         db = FirebaseFirestore.getInstance();
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        gOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
+        gClient = GoogleSignIn.getClient(this, gOptions);
+
+        GoogleSignInAccount gAccount = GoogleSignIn.getLastSignedInAccount(this);
+
 
         //Navigation Bottom Logica ---------------------------
 
@@ -75,8 +87,16 @@ public class Ingreso_NuevoActivity extends AppCompatActivity {
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
             String itemId = getResources().getResourceEntryName(item.getItemId());
+            if ("bottom_logout".equals(itemId)) {
+                gClient.signOut().addOnCompleteListener(task -> {
+                    finish();
+                    startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                });
+                return true; // Detener el procesamiento si es logout
+            }
             if (navigationMap.containsKey(itemId)) {
-                startActivity(navigationMap.get(itemId));
+                Intent intent = navigationMap.get(itemId);
+                startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_rigth, R.anim.slide_out_left);
                 finish();
                 return true;
@@ -148,7 +168,7 @@ public class Ingreso_NuevoActivity extends AppCompatActivity {
                             .collection("ingresos")
                             .add(ingreso)
                             .addOnSuccessListener(unused -> {
-                                Toast.makeText(Ingreso_NuevoActivity.this, "Saved", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Ingreso_NuevoActivity.this, "Guardado", Toast.LENGTH_SHORT).show();
                             })
                             .addOnFailureListener(e ->{
                                 Toast.makeText(Ingreso_NuevoActivity.this, "Algo paso al guardar", Toast.LENGTH_SHORT).show();

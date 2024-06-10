@@ -25,7 +25,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Login"
+                android:text="Inicie Sesión"
                 android:id="@+id/loginText"
                 android:textSize="36sp"
                 android:textAlignment="center"
@@ -38,7 +38,7 @@
                 android:background="@drawable/custom_edittext"
                 android:layout_marginTop="40dp"
                 android:padding="8dp"
-                android:hint="Email"
+                android:hint="Correo"
                 android:drawableLeft="@drawable/account_circle_fill0_wght400_grad0_opsz24"
                 android:textColor="@color/black"
                 android:drawablePadding="8dp"/>
@@ -50,7 +50,7 @@
                 android:layout_marginTop="20dp"
                 android:inputType="textPassword"
                 android:padding="8dp"
-                android:hint="Password"
+                android:hint="Contraseña"
                 android:drawableLeft="@drawable/lock_24dp_fill0_wght400_grad0_opsz24"
                 android:textColor="@color/black"
                 android:drawablePadding="8dp"/>
@@ -64,16 +64,18 @@
                 android:backgroundTint="@color/secondary"
                 app:cornerRadius = "20dp"/>
 
-            <TextView
-                android:id="@+id/forgot_password"
-                android:layout_width="wrap_content"
+
+            <com.developer.gbuttons.GoogleSignInButton
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="Inicia Sesion con Google"
+                android:id="@+id/googleBtn"
+                app:isDarkTheme="true"
                 android:layout_gravity="center"
-                android:layout_marginTop="5dp"
-                android:padding="8dp"
-                android:text="Forgot Password?"
-                android:textColor="@color/color_principal"
-                android:textSize="16sp" />
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="40dp"
+                android:padding="8dp"/>
 
             <TextView
                 android:id="@+id/signUpRedirectText"
@@ -82,7 +84,7 @@
                 android:layout_marginTop="20dp"
                 android:padding="8dp"
                 android:layout_gravity="center"
-                android:text="Not yet registered? Sign Up"
+                android:text="¿No tiene una cuenta? Regístrese"
                 android:textAlignment="center"
                 android:textColor="@color/color_principal"
                 android:textSize="18sp" />

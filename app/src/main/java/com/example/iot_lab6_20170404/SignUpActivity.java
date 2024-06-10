@@ -41,19 +41,19 @@ public class SignUpActivity extends AppCompatActivity {
                 String user = signupEmail.getText().toString().trim();
                 String pass = signupPassword.getText().toString().trim();
                 if (user.isEmpty()){
-                    signupEmail.setError("Email cannot be empty");
+                    signupEmail.setError("Debe colocar un correo");
                 }
                 if (pass.isEmpty()){
-                    signupPassword.setError("Password cannot be empty");
+                    signupPassword.setError("Debe ingresasr la contraseña");
                 } else{
                     auth.createUserWithEmailAndPassword(user, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                Toast.makeText(SignUpActivity.this, "SignUp Successful", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SignUpActivity.this, "Registro Exitoso", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
                             } else {
-                                Toast.makeText(SignUpActivity.this, "SignUp Failed" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SignUpActivity.this, "Fallo en el registro" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         }
                     });

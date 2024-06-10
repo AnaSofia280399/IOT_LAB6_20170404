@@ -138,7 +138,7 @@
                             android:id="@+id/textInputLayoutSuper_email"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Fecha"
+                            android:hint="Fecha: Guardado Automatico"
                             android:inputType="text"
                             android:paddingTop="2dp"
                             app:layout_constraintEnd_toEndOf="parent"

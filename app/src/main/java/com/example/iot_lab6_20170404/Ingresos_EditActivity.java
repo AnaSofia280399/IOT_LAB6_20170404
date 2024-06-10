@@ -17,6 +17,10 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.iot_lab6_20170404.dto.Ingreso;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -51,6 +55,9 @@ public class Ingresos_EditActivity extends AppCompatActivity {
     Button guardar_editButton;
     EditText  edit_monto, edit_descripcion;
 
+    GoogleSignInClient gClient;
+    GoogleSignInOptions gOptions;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +67,11 @@ public class Ingresos_EditActivity extends AppCompatActivity {
 
         db = FirebaseFirestore.getInstance();
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        gOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
+        gClient = GoogleSignIn.getClient(this, gOptions);
+
+        GoogleSignInAccount gAccount = GoogleSignIn.getLastSignedInAccount(this);
 
         //Navigation Bottom Logica ---------------------------
 
@@ -72,15 +84,22 @@ public class Ingresos_EditActivity extends AppCompatActivity {
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
             String itemId = getResources().getResourceEntryName(item.getItemId());
+            if ("bottom_logout".equals(itemId)) {
+                gClient.signOut().addOnCompleteListener(task -> {
+                    finish();
+                    startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                });
+                return true; // Detener el procesamiento si es logout
+            }
             if (navigationMap.containsKey(itemId)) {
-                startActivity(navigationMap.get(itemId));
+                Intent intent = navigationMap.get(itemId);
+                startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_rigth, R.anim.slide_out_left);
                 finish();
                 return true;
             }
             return false;
         });
-
 
         //----------------------------------------------------
 
